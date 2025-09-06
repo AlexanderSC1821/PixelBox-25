@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=LED Matrix GUI
+Comment = Run the LED Matrix Controller
+Exec=/home/alexa/Desktop/GUI_LED/run_led_gui.sh
+Icon=utilities-terminal
+Terminal=true
+Type=Application
+Categories=Utility;
