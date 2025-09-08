@@ -1,3 +1,15 @@
+# =====================================================================
+#                   Pixelbox - shakeSensorTest.py
+#   shakeSensorTest.py
+#   Pixelbox
+#   Author: Alex Closson
+#   Date: 09/08/2025
+#   Last Update: 09/08/2025
+#   Version: 1.0.0
+#   Summary: File to check on GPIO pin for response from Shake Sensor.
+# =====================================================================
+
+
 import RPi.GPIO as GPIO
 import time
 

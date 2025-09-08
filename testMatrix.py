@@ -1,3 +1,15 @@
+# =====================================================================
+#                   Pixelbox - testMatrix.py
+#   testMatrix.py
+#   Pixelbox
+#   Author: Alex Closson
+#   Date: 09/08/2025
+#   Last Update: 09/08/2025
+#   Version: 1.0.0
+#   Summary: File to test the LED matrix functionality by illuminating the first 10 LEDs with a green light and then turning them off.
+# =====================================================================
+
+
 import time
 import board
 import neopixel

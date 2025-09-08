@@ -1,3 +1,15 @@
+# =====================================================================
+#                   Pixelbox - grid_draw_pixelbox.py
+#   grid_draw_pixelbox.py
+#   Pixelbox
+#   Author: Alex Closson
+#   Date: 09/08/2025
+#   Last Update: 09/08/2025
+#   Version: 1.0.0
+#   Summary: File to use GUI to draw on LED matrix with touchscreen.
+# =====================================================================
+
+
 import tkinter as tk
 from evdev import InputDevice, ecodes
 import board
@@ -265,7 +277,6 @@ class LEDTouchGUI:
                 # device might have been disconnected
                 pass
 
-        # poll again soon (~120 Hz). Increase to 4ms if you want more responsiveness.
         self.root.after(8, self.poll_touch)
 
 
@@ -274,7 +285,6 @@ class LEDTouchGUI:
 # =========================
 if __name__ == "__main__":
     root = tk.Tk()
-    # Fullscreen optional—uncomment if you want it
     root.attributes("-fullscreen", True)
 
     app = LEDTouchGUI(root)

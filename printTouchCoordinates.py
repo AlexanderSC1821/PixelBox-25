@@ -1,3 +1,15 @@
+# =====================================================================
+#                   Pixelbox - printTouchCoordinates.py
+#   printTouchCoordinates.py
+#   Pixelbox
+#   Author: Alex Closson
+#   Date: 09/08/2025
+#   Last Update: 09/08/2025
+#   Version: 1.0.0
+#   Summary: File to print the coordinates of touch inputs on the touchscreen.
+# =====================================================================
+
+
 from evdev import InputDevice, categorize, ecodes
 import os
 

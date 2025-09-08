@@ -1,3 +1,15 @@
+# =====================================================================
+#                   Pixelbox - touchToLED.py
+#   touchToLED.py
+#   Pixelbox
+#   Author: Alex Closson
+#   Date: 09/08/2025
+#   Last Update: 09/08/2025
+#   Version: 1.0.0
+#   Summary: File to test functionality between touchscreen and LED Matrix.
+# =====================================================================
+
+
 from evdev import InputDevice, ecodes
 import board
 import neopixel
@@ -16,8 +28,8 @@ TOUCH_HEIGHT = 768   # px
 
 # ----- Orientation toggles (hardcode as needed) -----
 SWAP_AXES = True     # set True if row/col appear swapped
-HFLIP     = False     # mirror left/right
-VFLIP     = False      # <-- RECOMMENDED for your symptom (flip vertical)
+HFLIP     = False     # Horizontal Flip Mirror Left/Right
+VFLIP     = False      # Vertical Flip Mirror Up/Down
 ROTATE    = 0         # 0, 90, 180, 270 (degrees)
 
 # ----- Setup NeoPixel -----
@@ -38,7 +50,6 @@ def map_touch_to_led(x, y):
     col = int((x / max(1, TOUCH_WIDTH  - 1)) * (GRID_COLS - 1) + 0.5)
     row = int((y / max(1, TOUCH_HEIGHT - 1)) * (GRID_ROWS - 1) + 0.5)
 
-    # --- DO NOT swap top/bottom halves (removed your old 8-row swap) ---
 
     # apply transforms
     if SWAP_AXES:
@@ -91,7 +102,7 @@ def main():
 
                 print(f"Touch → LED ({row},{col}) → Index {led_index}")
 
-                clear_matrix()
+                
                 pixels[led_index] = (255, 0, 0)  # Red
                 pixels.show()
 
