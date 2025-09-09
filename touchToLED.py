@@ -38,6 +38,7 @@ pixels = neopixel.NeoPixel(
     auto_write=False, pixel_order=neopixel.GRB
 )
 
+# ----- Helper Functions -----
 def serpentine_index(row, col):
     # row-wise serpentine
     if row % 2 == 0:
@@ -77,7 +78,9 @@ def clear_matrix():
     pixels.fill((0, 0, 0))
     pixels.show()
 
+# ----- Main Loop -----
 def main():
+    #Path of touchscreen device. Adjust as needed.
     touch_dev_path = '/dev/input/by-id/usb-UsbHID_SingWon-CTP-V1.18A_6F6A099B1133-event-if00'
     try:
         device = InputDevice(touch_dev_path)
@@ -86,6 +89,7 @@ def main():
         print("Touchscreen device not found.")
         return
 
+    #Clear the screen initially
     clear_matrix()
     x = y = None
 
@@ -100,9 +104,8 @@ def main():
                 row, col = map_touch_to_led(x, y)
                 led_index = serpentine_index(row, col)
 
+                #Light up corresponding LED and print to terminal
                 print(f"Touch → LED ({row},{col}) → Index {led_index}")
-
-                
                 pixels[led_index] = (255, 0, 0)  # Red
                 pixels.show()
 
@@ -112,5 +115,7 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
+        #Ctrl-C to exit and clear matrix
         clear_matrix()
-        print("\nExited by user")
+        print("\nExited by user using keyboard interrupt.")
+        
