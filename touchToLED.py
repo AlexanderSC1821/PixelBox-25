@@ -10,10 +10,10 @@
 # =====================================================================
 
 
-from evdev import InputDevice, ecodes
-import board
-import neopixel
-import time
+from evdev import InputDevice, ecodes #Touchscreen input library
+import board #Pin definitions for Raspberry Pi
+import neopixel #LED Matrix library
+import time #Time library for delays
 
 # ----- LED Matrix Configuration -----
 GRID_ROWS = 16
@@ -23,7 +23,7 @@ PIXEL_PIN = board.D12
 BRIGHTNESS = 0.1
 
 # ----- Touch Area Limits -----
-TOUCH_WIDTH  = 768   # px (use your device's true max if known)
+TOUCH_WIDTH  = 768   # px 
 TOUCH_HEIGHT = 768   # px
 
 # ----- Orientation toggles (hardcode as needed) -----
@@ -83,7 +83,7 @@ def main():
     #Path of touchscreen device. Adjust as needed.
     touch_dev_path = '/dev/input/by-id/usb-UsbHID_SingWon-CTP-V1.18A_6F6A099B1133-event-if00'
     try:
-        device = InputDevice(touch_dev_path)
+        device = InputDevice(touch_dev_path) #Initialize touchscreen device
         print(f"Listening on: {device.name}")
     except FileNotFoundError:
         print("Touchscreen device not found.")
