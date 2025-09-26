@@ -81,6 +81,16 @@ def clear_matrix():
     pixels.fill((0, 0, 0))
     pixels.show()
 
+# Set the button indicator LEDs for the given index
+def set_button_indicator(button_index, color):
+
+    for i in range(int(GRID_ROWS / NUM_BUTTONS)):
+
+        led_index = serpentine_index(GRID_COLS-1, button_index*(int(GRID_ROWS/NUM_BUTTONS)) + i)
+        pixels[led_index] = color
+
+    pixels.show()
+
 # ----- Main Loop -----
 def main():
     #Path of touchscreen device. Adjust as needed.
@@ -134,29 +144,42 @@ def main():
 
                     if selected_button is not None:
 
+                        # If currently selected button differs from last, clear LED indicator
+                        if prev_selected_button is not None and prev_selected_button != selected_button:
+                            set_button_indicator(prev_selected_button, (0, 0, 0))
+
                         match selected_button:
                             # Clear button
                             case 0:
                                 print("Clear button selected")
+                                set_button_indicator(selected_button, (255, 255, 255))
                                 clear_matrix()
                             # While color button
                             case 1:
                                 print("White color selected")
-                                selected_color = (255, 255, 255)                          
+                                selected_color = (255, 255, 255)
+                                set_button_indicator(selected_button, (selected_color))
                             # Red color button
                             case 2:
                                 print("Red color selected")
-                                selected_color = (255, 0, 0)                               
+                                selected_color = (255, 0, 0)
+                                set_button_indicator(selected_button, (selected_color))
                             # Green color button
                             case 3:
                                 print("Green color selected")
-                                selected_color = (0, 255, 0)                                 
+                                selected_color = (0, 255, 0)
+                                set_button_indicator(selected_button, (selected_color))
                             # Blue color button
                             case 4:
                                 print("Blue color selected")
-                                selected_color = (0, 0, 255)      
+                                selected_color = (0, 0, 255)
+                                set_button_indicator(selected_button, (selected_color))
                             case _:
                                 print("Unused button")
+                                set_button_indicator(selected_button, (255, 255, 255))
+
+                        prev_selected_button = selected_button
+
 
 if __name__ == "__main__":
     try:
