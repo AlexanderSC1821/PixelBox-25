@@ -93,6 +93,11 @@ def main():
     clear_matrix()
     x = y = None
 
+    #Button variables
+    selected_color = (255, 255, 255)
+    selected_button = None
+    prev_selected_button = None
+
     for event in device.read_loop():
         if event.type == ecodes.EV_ABS:
             if event.code == ecodes.ABS_MT_POSITION_X:
@@ -101,15 +106,23 @@ def main():
                 y = event.value
         elif event.type == ecodes.EV_SYN:
             if x is not None and y is not None:
-                row, col = map_touch_to_led(x, y)
-                led_index = serpentine_index(row, col)
 
-                #Light up corresponding LED and print to terminal
-                print(f"Touch → LED ({row},{col}) → Index {led_index}")
-                pixels[led_index] = (255, 0, 0)  # Red
-                pixels.show()
+                # If touch point on LED matrix
+                if  x<= TOUCH_WIDTH:
+                    row, col = map_touch_to_led(x, y)
+                    led_index = serpentine_index(row, col)
 
-                x = y = None
+                    # Light up corresponding LED and print to terminal
+                    print(f"Touch LED ({row},{col}) Index {led_index}")
+                    pixels[led_index] = selected_color
+                    pixels.show()
+
+                    x = y = None
+
+                # Touch point on virtual button area
+                else:
+
+                    print("Touch over button area")
 
 if __name__ == "__main__":
     try:
