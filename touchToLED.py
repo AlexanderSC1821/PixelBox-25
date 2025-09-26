@@ -32,6 +32,9 @@ HFLIP     = False     # Horizontal Flip Mirror Left/Right
 VFLIP     = False      # Vertical Flip Mirror Up/Down
 ROTATE    = 0         # 0, 90, 180, 270 (degrees)
 
+# ----- Button Configuration -----
+NUM_BUTTONS = 8
+
 # ----- Setup NeoPixel -----
 pixels = neopixel.NeoPixel(
     PIXEL_PIN, NUM_PIXELS, brightness=BRIGHTNESS,
@@ -119,10 +122,41 @@ def main():
 
                     x = y = None
 
-                # Touch point on virtual button area
-                else:
+                # Touch point falls over virtual button area
+                else: 
 
-                    print("Touch over button area")
+                    # Determine selected button
+                    for i in range(NUM_BUTTONS):
+                        if y >= i*(TOUCH_HEIGHT / NUM_BUTTONS) and y <= (i+1)*(TOUCH_HEIGHT / NUM_BUTTONS):
+
+                            selected_button = i
+                            print("Selected button: ", selected_button)
+
+                    if selected_button is not None:
+
+                        match selected_button:
+                            # Clear button
+                            case 0:
+                                print("Clear button selected")
+                                clear_matrix()
+                            # While color button
+                            case 1:
+                                print("White color selected")
+                                selected_color = (255, 255, 255)                          
+                            # Red color button
+                            case 2:
+                                print("Red color selected")
+                                selected_color = (255, 0, 0)                               
+                            # Green color button
+                            case 3:
+                                print("Green color selected")
+                                selected_color = (0, 255, 0)                                 
+                            # Blue color button
+                            case 4:
+                                print("Blue color selected")
+                                selected_color = (0, 0, 255)      
+                            case _:
+                                print("Unused button")
 
 if __name__ == "__main__":
     try:
