@@ -1,3 +1,12 @@
+'''
+Code Example Use:
+import scrollingText
+scrollingText.main("text")
+
+
+'''
+
+
 import time
 import board
 import neopixel
