@@ -23,14 +23,22 @@ PIXEL_PIN = board.D12
 BRIGHTNESS = 0.1
 
 # ----- Touch Area Limits -----
-TOUCH_WIDTH  = 768   # px 
-TOUCH_HEIGHT = 768   # px
+TOUCH_WIDTH  = 768        # px 
+TOUCH_HEIGHT = 768        # px
+FULL_OVERLAY_WIDTH = 1024 # px
+BUTTON_AREA_WIDTH = FULL_OVERLAY_WIDTH - TOUCH_WIDTH
 
 # ----- Orientation toggles (hardcode as needed) -----
 SWAP_AXES = True     # set True if row/col appear swapped
 HFLIP     = False     # Horizontal Flip Mirror Left/Right
 VFLIP     = False      # Vertical Flip Mirror Up/Down
-ROTATE    = 0         # 0, 90, 180, 270 (degrees)
+
+# P2-55: Rotation applied for actual matrix orientation
+ROTATE    = 90         # 0, 90, 180, 270 (degrees)
+
+# ----- Orientation toggles for button area -----
+ROTATE_BUTTON_INDICATORS = True # set True to rotate button indicators by 90 degrees clockwise
+TOUCH_OVERLAY_LEFT_SIDE  = True # set True if button area is located left of the LED matrix
 
 # ----- Button Configuration -----
 NUM_BUTTONS = 8
@@ -86,7 +94,10 @@ def set_button_indicator(button_index, color):
 
     for i in range(int(GRID_ROWS / NUM_BUTTONS)):
 
-        led_index = serpentine_index(GRID_COLS-1, button_index*(int(GRID_ROWS/NUM_BUTTONS)) + i)
+        if ROTATE_BUTTON_INDICATORS:
+            led_index = serpentine_index(button_index*(int(GRID_ROWS/NUM_BUTTONS)) + i, GRID_COLS-1)
+        else:
+            led_index = serpentine_index(GRID_COLS-1, button_index*(int(GRID_ROWS/NUM_BUTTONS)) + i)
         pixels[led_index] = color
 
     pixels.show()
@@ -121,7 +132,12 @@ def main():
             if x is not None and y is not None:
 
                 # If touch point on LED matrix
-                if  x<= TOUCH_WIDTH:
+                if  ((x >= BUTTON_AREA_WIDTH) and TOUCH_OVERLAY_LEFT_SIDE) or ((x <= TOUCH_WIDTH) and not TOUCH_OVERLAY_LEFT_SIDE):
+
+                    if TOUCH_OVERLAY_LEFT_SIDE:
+                        # Offset touch x value for button area
+                        x = x - BUTTON_AREA_WIDTH
+
                     row, col = map_touch_to_led(x, y)
                     led_index = serpentine_index(row, col)
 
