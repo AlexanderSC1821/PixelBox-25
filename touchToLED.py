@@ -170,23 +170,28 @@ def main():
                                 print("Clear button selected")
                                 set_button_indicator(selected_button, (255, 255, 255))
                                 clear_matrix()
-                            # While color button
+                            # Erase button
                             case 1:
+                                print("Erase selected")
+                                selected_color = (0, 0, 0)
+                                set_button_indicator(selected_button, (selected_color))
+                            # White color button
+                            case 2:
                                 print("White color selected")
                                 selected_color = (255, 255, 255)
                                 set_button_indicator(selected_button, (selected_color))
                             # Red color button
-                            case 2:
+                            case 3:
                                 print("Red color selected")
                                 selected_color = (255, 0, 0)
                                 set_button_indicator(selected_button, (selected_color))
                             # Green color button
-                            case 3:
+                            case 4:
                                 print("Green color selected")
                                 selected_color = (0, 255, 0)
                                 set_button_indicator(selected_button, (selected_color))
                             # Blue color button
-                            case 4:
+                            case 5:
                                 print("Blue color selected")
                                 selected_color = (0, 0, 255)
                                 set_button_indicator(selected_button, (selected_color))
