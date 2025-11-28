@@ -69,18 +69,13 @@ sudo evtest
 Run the Pixelbox software:
 python3 touchToLED.py
 
-If scrollingText.py exists in the same folder, Pixelbox will automatically start the scrolling text feature on launch.
+
 7. Using Pixelbox
 
 Touch Interaction
 	•	Touch coordinates are mapped to the 16×16 LED matrix.
 	•	Drawing and erasing modes are supported depending on your version of the code.
 	•	Orientation toggles and developer features are also available if enabled.
-
-Scrolling Text
-	•	Automatically starts if scrollingText.py is present.
-	•	Customize text inside that file.
-	•	Disable startup by commenting out the import inside touchToLED.py.
 
 ⸻
 
